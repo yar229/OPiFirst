@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoBlink", "DemoBlink\DemoBlink.vcxproj", "{32054B5C-336E-455C-9EFC-55AE46964B73}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoButtonISR", "DemoButtonISR\DemoButtonISR.vcxproj", "{CB820F47-1D3E-4B79-AE1E-F779066FFBA3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoSSD1306", "DemoSSD1306\DemoSSD1306.vcxproj", "{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClockSSD1306", "ClockSSD1306\ClockSSD1306.vcxproj", "{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Release|ARM = Release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32054B5C-336E-455C-9EFC-55AE46964B73}.Debug|ARM.ActiveCfg = Debug|ARM
+		{32054B5C-336E-455C-9EFC-55AE46964B73}.Debug|ARM.Build.0 = Debug|ARM
+		{32054B5C-336E-455C-9EFC-55AE46964B73}.Release|ARM.ActiveCfg = Release|ARM
+		{32054B5C-336E-455C-9EFC-55AE46964B73}.Release|ARM.Build.0 = Release|ARM
+		{CB820F47-1D3E-4B79-AE1E-F779066FFBA3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{CB820F47-1D3E-4B79-AE1E-F779066FFBA3}.Debug|ARM.Build.0 = Debug|ARM
+		{CB820F47-1D3E-4B79-AE1E-F779066FFBA3}.Release|ARM.ActiveCfg = Release|ARM
+		{CB820F47-1D3E-4B79-AE1E-F779066FFBA3}.Release|ARM.Build.0 = Release|ARM
+		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Debug|ARM.Build.0 = Debug|ARM
+		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Release|ARM.ActiveCfg = Release|ARM
+		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Release|ARM.Build.0 = Release|ARM
+		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Debug|ARM.Build.0 = Debug|ARM
+		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Release|ARM.ActiveCfg = Release|ARM
+		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Release|ARM.Build.0 = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE83EE81-3ED5-4BEC-8B50-CC9F193BE942}
+	EndGlobalSection
+EndGlobal
