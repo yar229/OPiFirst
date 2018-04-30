@@ -23,6 +23,9 @@ Written by Limor Fried/Ladyada  for Adafruit Industries.
 BSD license, check license.txt for more information
 All text above, and the splash screen must be included in any redistribution
 *********************************************************************/
+#include <stdint.h>
+#include "fonts.h"
+
 #ifndef SSD1306_I2C_H_
 #define SSD1306_I2C_H_
 
@@ -87,6 +90,14 @@ All text above, and the splash screen must be included in any redistribution
         #define SSD1306_LCDWIDTH                  96
         #define SSD1306_LCDHEIGHT                 16
 #endif
+
+typedef enum
+{
+	SSD1306_COLOR_TRANSPARENT = -1,     //< Transparent (not drawing)
+	SSD1306_COLOR_BLACK = 0,    //< Black (pixel off)
+	SSD1306_COLOR_WHITE = 1,    //< White (or blue, yellow, pixel on)
+	SSD1306_COLOR_INVERT = 2,   //< Invert pixel (XOR)
+} ssd1306_color_t;
 
 #define SSD1306_SETCONTRAST 0x81
 #define SSD1306_DISPLAYALLON_RESUME 0xA4
@@ -158,7 +169,7 @@ void ssd1306_drawFastHLine(int x, int y, int w, unsigned int color);
 void ssd1306_fillRect(int x, int y, int w, int h, int fillcolor);
 
 void ssd1306_setTextSize(int s);
-void ssd1306_drawString(char *str, int x, int y);
-void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size);
+void ssd1306_drawString(font_info_t *font, unsigned char *str, int x, int y);
+uint8_t ssd1306_drawChar(font_info_t *font, uint8_t x, uint8_t y, unsigned char c, int foreground, int background, uint8_t size);
 
 #endif				/* _SSD1306_I2C_H_ */

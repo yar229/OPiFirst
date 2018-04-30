@@ -52,7 +52,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="fonts.c" />
-    <ClCompile Include="font_glcd_5x7.c" />
+	<ClCompile Include="font_glcd_5x7.c" />
+    <ClCompile Include="font_glcdru_5x7.c" />
     <ClCompile Include="font_tahoma_8pt.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ssd1306_i2c.c" />
@@ -68,7 +69,11 @@
   <ItemGroup>
     <Object Include="ssd1306_i2c.o" />
   </ItemGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Link>
+      <DebuggerSymbolInformation>true</DebuggerSymbolInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

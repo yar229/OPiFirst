@@ -30,7 +30,8 @@ All text above, and the splash screen below must be included in any redistributi
 #include "ssd1306_i2c.h"
 
 #include <wiringPiI2C.h>
-
+#include <stdint.h>
+#include "fonts.h"
 #include "oled_fonts.h"
 
 #define true 1
@@ -39,6 +40,12 @@ All text above, and the splash screen below must be included in any redistributi
 #define rotation 0
 
 #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+
+#ifdef __GNUC__
+#define UNUSED(x) x __attribute__((unused))
+#else
+#define UNUSED(x) x
+#endif
 
 int cursor_y = 0;
 int cursor_x = 0;
@@ -746,11 +753,11 @@ void ssd1306_setTextSize(int s)
 	textsize = (s > 0) ? s : 1;
 }
 
-void ssd1306_write(int c)
+void ssd1306_write(font_info_t *font, unsigned char c)
 {
 	if (c == '\n') 
 	{
-		cursor_y += textsize * 8;
+		cursor_y += textsize * font->height;
 		cursor_x = 0;
 	} 
 	else if (c == '\r') 
@@ -759,28 +766,28 @@ void ssd1306_write(int c)
 	} 
 	else 
 	{
-		ssd1306_drawChar(cursor_x, cursor_y, c, WHITE, textsize);
-		cursor_x += textsize * 6;
-		if (wrap && (cursor_x > (WIDTH - textsize * 6))) 
+		uint8_t charWidth = ssd1306_drawChar(font, cursor_x, cursor_y, c, WHITE, BLACK, textsize); //(cursor_x, cursor_y, c, WHITE, textsize);
+		cursor_x += textsize * charWidth + font->c;
+		if (wrap && (cursor_x > (WIDTH - textsize * charWidth)))
 		{
-			cursor_y += textsize * 8;
+			cursor_y += textsize * font->height;
 			cursor_x = 0;
 		}
 	}
 }
 
-void ssd1306_drawString(char *str, int x, int y)
+void ssd1306_drawString(font_info_t *font, unsigned char *str, int x, int y)
 {
 	cursor_x = x;
 	cursor_y = y;
 	int i, end;
 	end = strlen(str);
 	for (i = 0; i < end; i++)
-		ssd1306_write(str[i]);
+		ssd1306_write(font, str[i]);	//ssd1306_write(str[i]);
 }
 
 // Draw a character
-void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size)
+void _backup_ssd1306_drawChar(int x, int y, unsigned char c, int color, int size)
 {
 
 	if ((x >= WIDTH) ||	// Clip right
@@ -814,4 +821,57 @@ void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size)
 			line >>= 1;
 		}
 	}
+}
+
+
+uint8_t ssd1306_drawChar(font_info_t *font, uint8_t x, uint8_t y, unsigned char c, int foreground, int background, uint8_t size)
+{
+	uint8_t i, j;
+	const uint8_t UNUSED(*bitmap);
+	uint8_t line = 0;
+
+	if (font == NULL)
+		return 0;
+
+	// we always have space in the font set
+	if ((c < font->char_start) || (c > font->char_end))
+		c = ' ';
+	c = c - font->char_start;       // c now become index to tables
+	bitmap = font->bitmap + font->char_descriptors[c].offset;
+	for (j = 0; j < font->height; ++j) 
+	{
+		for (i = 0; i < font->char_descriptors[c].width; ++i) 
+		{
+			//ssd1306_drawPixel(x + i, y + j, foreground);
+
+			if (i % 8 == 0) 
+			{
+				//line = bitmap[(font->char_descriptors[c].width + 7) / 8 * j + i / 8];     // line data
+				//unsigned char z = pgm_read_byte(bitmap + (font->char_descriptors[c].width + 7) / 8 * j + i / 8);
+				line = pgm_read_byte(bitmap + (font->char_descriptors[c].width + 7) / 8 * j + i / 8);
+			}
+			if (line & 0x80) 
+			{
+				ssd1306_drawPixel(x + i, y + j, foreground);
+			}
+			else 
+			{
+				switch (background) 
+				{
+					case SSD1306_COLOR_TRANSPARENT:
+						// Do not draw transparent background
+						break;
+					case SSD1306_COLOR_WHITE:
+					case SSD1306_COLOR_BLACK:
+						ssd1306_drawPixel(x + i, y + j, background);
+						break;
+					case SSD1306_COLOR_INVERT:
+						// 
+						break;
+				}
+			}
+			line = line << 1;
+		}
+	}
+	return (font->char_descriptors[c].width);
 }
