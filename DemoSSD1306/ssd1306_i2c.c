@@ -748,24 +748,31 @@ void ssd1306_setTextSize(int s)
 
 void ssd1306_write(int c)
 {
-
-	if (c == '\n') {
+	if (c == '\n') 
+	{
 		cursor_y += textsize * 8;
 		cursor_x = 0;
-	} else if (c == '\r') {
+	} 
+	else if (c == '\r') 
+	{
 		// skip em
-	} else {
+	} 
+	else 
+	{
 		ssd1306_drawChar(cursor_x, cursor_y, c, WHITE, textsize);
 		cursor_x += textsize * 6;
-		if (wrap && (cursor_x > (WIDTH - textsize * 6))) {
+		if (wrap && (cursor_x > (WIDTH - textsize * 6))) 
+		{
 			cursor_y += textsize * 8;
 			cursor_x = 0;
 		}
 	}
 }
 
-void ssd1306_drawString(char *str)
+void ssd1306_drawString(char *str, int x, int y)
 {
+	cursor_x = x;
+	cursor_y = y;
 	int i, end;
 	end = strlen(str);
 	for (i = 0; i < end; i++)

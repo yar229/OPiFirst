@@ -11,8 +11,11 @@ void main() {
 	//ssd1306_setTextSize(2);
 
 	char* text = "1рстуф1 Проверка работы oled экрана ssd1306 на    апельсинке";
-	ssd1306_drawString(text);
-	//ssd1306_drawChar
+	ssd1306_drawString(text, 0, 0);
+
+	char* text1 = "test";
+	ssd1306_drawString(text1, 0, 54);
+
 	ssd1306_display();
 	delay(5000);
 	ssd1306_dim(1);

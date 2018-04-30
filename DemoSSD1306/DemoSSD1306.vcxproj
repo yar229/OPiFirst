@@ -51,6 +51,9 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fonts.c" />
+    <ClCompile Include="font_glcd_5x7.c" />
+    <ClCompile Include="font_tahoma_8pt.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ssd1306_i2c.c" />
   </ItemGroup>
@@ -58,6 +61,7 @@
     <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fonts.h" />
     <ClInclude Include="oled_fonts.h" />
     <ClInclude Include="ssd1306_i2c.h" />
   </ItemGroup>

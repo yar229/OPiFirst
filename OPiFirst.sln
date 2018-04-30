@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoButtonISR", "DemoButton
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoSSD1306", "DemoSSD1306\DemoSSD1306.vcxproj", "{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClockSSD1306", "ClockSSD1306\ClockSSD1306.vcxproj", "{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -29,10 +27,6 @@ Global
 		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Debug|ARM.Build.0 = Debug|ARM
 		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Release|ARM.ActiveCfg = Release|ARM
 		{C5F5E2E5-0B52-4171-B2DD-C76175D608F5}.Release|ARM.Build.0 = Release|ARM
-		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Debug|ARM.ActiveCfg = Debug|ARM
-		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Debug|ARM.Build.0 = Debug|ARM
-		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Release|ARM.ActiveCfg = Release|ARM
-		{1382BC5F-C56B-49D5-88A4-AB82C16C31DD}.Release|ARM.Build.0 = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
