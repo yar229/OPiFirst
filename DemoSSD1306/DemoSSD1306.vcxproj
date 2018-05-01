@@ -51,10 +51,12 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="consolas_24pt.c" />
     <ClCompile Include="fonts.c" />
-	<ClCompile Include="font_glcd_5x7.c" />
+    <ClCompile Include="font_glcd_5x7.c" />
     <ClCompile Include="font_glcdru_5x7.c" />
     <ClCompile Include="font_tahoma_8pt.c" />
+    <ClCompile Include="segoeUISemibold_24pt.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ssd1306_i2c.c" />
   </ItemGroup>

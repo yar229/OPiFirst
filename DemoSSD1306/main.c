@@ -12,14 +12,18 @@ void main()
 	ssd1306_clearDisplay();
 	//ssd1306_setTextSize(2);
 
-	unsigned char* text = "Glcd english";
+	unsigned char* text3 = "Chiken";
+	ssd1306_drawString(fonts[3], text3, 0, 15);
+
+
+	unsigned char* text = "monster";
 	ssd1306_drawString(fonts[0], text, 0, 0);
 
-	unsigned char* text1 = u8"рЁєёёъшщ Glcdru";
-	ssd1306_drawString(fonts[1], text1, 0, 20);
+	//unsigned char* text1 = "1рстуф1 Проверка работы oled экрана ssd1306 на    апельсинке";;
+	//ssd1306_drawString(fonts[1], text1, 0, 20);
 
 
-	unsigned char* text2 = "English tahoma";
+	unsigned char* text2 = "killer";
 	ssd1306_drawString(fonts[2], text2, 0, 50);
 
 

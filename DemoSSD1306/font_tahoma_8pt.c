@@ -1,7 +1,3 @@
-/*
-*font_tahoma_8pt.c
-*
-*/
 #include "fonts.h"
 
 /*
