@@ -35,7 +35,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>wiringPi;pthread;glib-2.0</LibraryDependencies>
+      <LibraryDependencies>wiringPi;pthread;glib-2.0;rt</LibraryDependencies>
     </Link>
     <RemotePostBuildEvent>
       <Command>
@@ -57,7 +57,7 @@
     <ClCompile Include="font_glcdru_5x7.c" />
     <ClCompile Include="font_tahoma_8pt.c" />
     <ClCompile Include="segoeUISemibold_24pt.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="ssd1306_i2c.c" />
   </ItemGroup>
   <ItemGroup>
