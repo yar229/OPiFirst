@@ -52,6 +52,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="consolas_24pt.c" />
+    <ClCompile Include="DrawDatetime.cpp" />
     <ClCompile Include="fonts.c" />
     <ClCompile Include="font_glcd_5x7.c" />
     <ClCompile Include="font_glcdru_5x7.c" />
@@ -64,6 +65,7 @@
     <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DrawDatetime.h" />
     <ClInclude Include="fonts.h" />
     <ClInclude Include="oled_fonts.h" />
     <ClInclude Include="ssd1306_i2c.h" />

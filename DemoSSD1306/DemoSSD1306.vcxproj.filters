@@ -1,3 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Object Include="ssd1306_i2c.o" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="consolas_24pt.c" />
+    <ClCompile Include="fonts.c" />
+    <ClCompile Include="font_glcd_5x7.c" />
+    <ClCompile Include="font_glcdru_5x7.c" />
+    <ClCompile Include="font_tahoma_8pt.c" />
+    <ClCompile Include="segoeUISemibold_24pt.c" />
+    <ClCompile Include="ssd1306_i2c.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="DrawDatetime.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fonts.h" />
+    <ClInclude Include="oled_fonts.h" />
+    <ClInclude Include="ssd1306_i2c.h" />
+    <ClInclude Include="DrawDatetime.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+  </ItemGroup>
 </Project>
