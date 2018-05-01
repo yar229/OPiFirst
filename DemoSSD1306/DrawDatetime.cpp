@@ -48,6 +48,8 @@ font_info_t* bigFont = (font_info_t *)(fonts[4]);
 
 void PrintDatetime(std::time_t time)
 {
+	//ssd1306_drawPixel(5, 5, WHITE);
+
 	auto local = localtime(&time);
 
 	strftime(datebuffer, 100, "%a, %Y-%m-%d", local);

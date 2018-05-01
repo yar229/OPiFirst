@@ -36,7 +36,7 @@ All text above, and the splash screen below must be included in any redistributi
 #define true 1
 #define false 0
 
-#define rotation 0
+//#define rotation 0
 
 #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 
@@ -48,6 +48,8 @@ All text above, and the splash screen below must be included in any redistributi
 
 int cursor_y = 0;
 int cursor_x = 0;
+uint8_t rotation = 0;
+uint8_t upsideDown = 0;
 
 // the memory buffer for the LCD. Displays Adafruit logo
 int buffer[SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8] = {
@@ -197,32 +199,41 @@ void ssd1306_drawPixel(int x, int y, unsigned int color)
 		return;
 
 	// check rotation, move pixel around if necessary
-	switch (rotation) {
-	case 1:
-		ssd1306_swap(x, y);
-		x = WIDTH - x - 1;
-		break;
-	case 2:
-		x = WIDTH - x - 1;
-		y = HEIGHT - y - 1;
-		break;
-	case 3:
-		ssd1306_swap(x, y);
-		y = HEIGHT - y - 1;
-		break;
+	switch (rotation) 
+	{
+		case 1:
+			ssd1306_swap(x, y);
+			x = WIDTH - x - 1;
+			break;
+		case 2:
+			x = WIDTH - x - 1;
+			y = HEIGHT - y - 1;
+			break;
+		case 3:
+			ssd1306_swap(x, y);
+			y = HEIGHT - y - 1;
+			break;
+	}
+
+	// check upside-down
+	if (upsideDown)
+	{
+		y = SSD1306_LCDHEIGHT - y + 1;
+		x = SSD1306_LCDWIDTH - x + 1;
 	}
 
 	// x is which column
-	switch (color) {
-	case WHITE:
-		buffer[x + (y / 8) * SSD1306_LCDWIDTH] |= (1 << (y & 7));
-		break;
-	case BLACK:
-		buffer[x + (y / 8) * SSD1306_LCDWIDTH] &= ~(1 << (y & 7));
-		break;
-	case INVERSE:
-		buffer[x + (y / 8) * SSD1306_LCDWIDTH] ^= (1 << (y & 7));
-		break;
+	switch (color) 
+	{
+		case WHITE:
+			buffer[x + (y / 8) * SSD1306_LCDWIDTH] |= (1 << (y & 7));
+			break;
+		case BLACK:
+			buffer[x + (y / 8) * SSD1306_LCDWIDTH] &= ~(1 << (y & 7));
+			break;
+		case INVERSE:
+			buffer[x + (y / 8) * SSD1306_LCDWIDTH] ^= (1 << (y & 7));
+			break;
 	}
 }
 
@@ -311,6 +322,18 @@ void ssd1306_invertDisplay(unsigned int i)
 		ssd1306_command(SSD1306_NORMALDISPLAY);
 	}
 }
+
+//1 2 3
+void ssd1306_rotation(uint8_t mode) 
+{
+	rotation = mode;
+}
+
+void ssd1306_upsideDown(uint8_t yesno)
+{
+	upsideDown = yesno;
+}
+
 
 void ssd1306_command(unsigned int c)
 {
@@ -639,36 +662,40 @@ void ssd1306_drawFastVLineInternal(int x, int __y, int __h, unsigned int color)
 void ssd1306_drawFastHLine(int x, int y, int w, unsigned int color)
 {
 	unsigned int bSwap = false;
-	switch (rotation) {
-	case 0:
-		// 0 degree rotation, do nothing
-		break;
-	case 1:
-		// 90 degree rotation, swap x & y for rotation, then invert x
-		bSwap = true;
-		ssd1306_swap(x, y);
-		x = WIDTH - x - 1;
-		break;
-	case 2:
-		// 180 degree rotation, invert x and y - then shift y around for
-		// height.
-		x = WIDTH - x - 1;
-		y = HEIGHT - y - 1;
-		x -= (w - 1);
-		break;
-	case 3:
-		// 270 degree rotation, swap x & y for rotation, then invert y and 
-		// adjust y for w (not to become h)
-		bSwap = true;
-		ssd1306_swap(x, y);
-		y = HEIGHT - y - 1;
-		y -= (w - 1);
-		break;
+	switch (rotation) 
+	{
+		case 0:
+			// 0 degree rotation, do nothing
+			break;
+		case 1:
+			// 90 degree rotation, swap x & y for rotation, then invert x
+			bSwap = true;
+			ssd1306_swap(x, y);
+			x = WIDTH - x - 1;
+			break;
+		case 2:
+			// 180 degree rotation, invert x and y - then shift y around for
+			// height.
+			x = WIDTH - x - 1;
+			y = HEIGHT - y - 1;
+			x -= (w - 1);
+			break;
+		case 3:
+			// 270 degree rotation, swap x & y for rotation, then invert y and 
+			// adjust y for w (not to become h)
+			bSwap = true;
+			ssd1306_swap(x, y);
+			y = HEIGHT - y - 1;
+			y -= (w - 1);
+			break;
 	}
 
-	if (bSwap) {
+	if (bSwap) 
+	{
 		ssd1306_drawFastVLineInternal(x, y, w, color);
-	} else {
+	} 
+	else 
+	{
 		ssd1306_drawFastHLineInternal(x, y, w, color);
 	}
 }
@@ -727,7 +754,7 @@ void ssd1306_fillRect(int x, int y, int w, int h, int fillcolor)
 
 	switch (rotation) {
 	case 1:
-		swap_values(x, y);
+		ssd1306_swap(x, y); //swap_values(x, y);
 		x = WIDTH - x - 1;
 		break;
 	case 2:
@@ -735,7 +762,7 @@ void ssd1306_fillRect(int x, int y, int w, int h, int fillcolor)
 		y = HEIGHT - y - 1;
 		break;
 	case 3:
-		swap_values(x, y);
+		ssd1306_swap(x, y); //swap_values(x, y);
 		y = HEIGHT - y - 1;
 		break;
 	}

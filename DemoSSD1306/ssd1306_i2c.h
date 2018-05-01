@@ -150,6 +150,8 @@ void ssd1306_command(unsigned int c);
 
 void ssd1306_clearDisplay(void);
 void ssd1306_invertDisplay(unsigned int i);
+void ssd1306_rotation(uint8_t mode);
+void ssd1306_upsideDown(uint8_t yesno);
 void ssd1306_display();
 
 void ssd1306_startscrollright(unsigned int start, unsigned int stop);
