@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fonts.h" />
-    <ClInclude Include="oled_fonts.h" />
     <ClInclude Include="ssd1306_i2c.h" />
     <ClInclude Include="DrawDatetime.h" />
   </ItemGroup>
