@@ -34,8 +34,8 @@ void DateTimePainter::PrintDatetime(std::time_t time)
 	if (_doFullRedraw || _oldTime->tm_hour != local->tm_hour)
 		DrawNum2(_fontBig, local->tm_hour, _coordXHour, _coordYTime, _printBuffer);
 
-	if (_doFullRedraw)
-		ssd1306_drawString(_fontBig, (unsigned char *)":", _coordXHour, _coordYTime);
+	if (_doFullRedraw || 0 == _oldTime->tm_year)
+		ssd1306_drawString(_fontBig, (unsigned char *)":", _coordXColon, _coordYTime);
 
 	if (_doFullRedraw || _oldTime->tm_min != local->tm_min)
 		DrawNum2(_fontBig, local->tm_min, _coordXMinute, _coordYTime, _printBuffer);
@@ -51,6 +51,6 @@ void DateTimePainter::PrintDatetime(std::time_t time)
 inline void DateTimePainter::DrawNum2(font_info_t* font, int value, int x, int y, char *buffer)
 {
 	sprintf(buffer, "%02d", value);
-	ssd1306_drawString(font, (unsigned char *)buffer, _coordXHour, y);
+	ssd1306_drawString(font, (unsigned char *)buffer, x, y);
 }
 
