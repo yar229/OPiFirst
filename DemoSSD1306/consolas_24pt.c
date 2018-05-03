@@ -3342,7 +3342,7 @@ const font_char_desc_t consolas_24pt_descriptors[] =
 /* Font information for Consolas 24pt */
 const font_info_t consolas_24pt_font_info =
 {
-	30, /*  Character height */
+	32, /*  Character height */
 	2,
 	' ', /*  Start character */
 	'~', /*  End character */

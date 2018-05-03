@@ -51,6 +51,7 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="consolas_11pt.c" />
     <ClCompile Include="consolas_24pt.c" />
     <ClCompile Include="DrawDatetime.cpp" />
     <ClCompile Include="fonts.c" />

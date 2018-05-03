@@ -14,6 +14,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DrawDatetime.cpp" />
     <ClCompile Include="ThreadTimer.cpp" />
+    <ClCompile Include="consolas_11pt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fonts.h" />
