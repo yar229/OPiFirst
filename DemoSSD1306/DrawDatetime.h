@@ -21,7 +21,7 @@ class DateTimePainter
 		font_info_t* _fontBig = (font_info_t *)(fonts[4]);
 
 		//symbol positions for monowidth font
-		const uint8_t _coordXDate = 17;
+		//const uint8_t _coordXDate = 17;
 		const uint8_t _coordYDate = 5;
 
 		const uint8_t _widthCharBig = ssd1306_charWidth(_fontBig, '0');

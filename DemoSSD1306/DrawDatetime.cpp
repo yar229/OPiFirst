@@ -30,7 +30,11 @@ void DateTimePainter::PrintDatetime(std::time_t time)
 	if (_doFullRedraw || _oldTime->tm_year != local->tm_year || _oldTime->tm_mon != local->tm_mon || _oldTime->tm_mday != local->tm_mday)
 	{	// draw year-month-day line
 		strftime(_printBuffer, 100, "%a, %Y-%m-%d", local);
-		ssd1306_drawString(_fontSmall, (unsigned char *)_printBuffer, _coordXDate, _coordYDate);
+		ssd1306_drawString(
+			_fontSmall, 
+			(unsigned char *)_printBuffer, 
+			SSD1306_LCDWIDTH / 2 - ssd1306_stringWidth(_fontSmall, (unsigned char *)_printBuffer) / 2,
+			_coordYDate);
 	}
 
 	if (_doFullRedraw || _oldTime->tm_hour != local->tm_hour)

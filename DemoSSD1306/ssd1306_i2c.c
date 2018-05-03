@@ -815,43 +815,11 @@ void ssd1306_drawString(font_info_t *font, unsigned char *str, int x, int y)
 		ssd1306_write(font, str[i]);	//ssd1306_write(str[i]);
 }
 
-// Draw a character
-//void _backup_ssd1306_drawChar(int x, int y, unsigned char c, int color, int size)
-//{
-//
-//	if ((x >= WIDTH) ||	// Clip right
-//	    (y >= HEIGHT) ||	// Clip bottom
-//	    ((x + 6 * size - 1) < 0) ||	// Clip left
-//	    ((y + 8 * size - 1) < 0))	// Clip top
-//		return;
-//	int i;
-//	int j;
-//	for (i = 0; i < 6; i++) 
-//	{
-//		int line;
-//		if (i == 5)
-//			line = 0x0;
-//		else
-//			line = pgm_read_byte(font + (c * 5) + i);
-//
-//		for (j = 0; j < 8; j++) 
-//		{
-//			if (line & 0x1) 
-//			{
-//				if (size == 1)	// default size
-//					ssd1306_drawPixel(x + i, y + j, color);
-//				else 
-//				{	// big size
-//					ssd1306_fillRect(x + (i * size),
-//							 y + (j * size), size,
-//							 size, color);
-//				}
-//			}
-//			line >>= 1;
-//		}
-//	}
-//}
 
+uint8_t ssd1306_charWidthInternal(font_info_t *font, char value)
+{
+	return font->char_descriptors[value - font->char_start].width;
+}
 
 uint8_t ssd1306_charWidth(font_info_t *font, char value)
 {
@@ -861,7 +829,31 @@ uint8_t ssd1306_charWidth(font_info_t *font, char value)
 	if ((value < font->char_start) || (value > font->char_end))
 		value = ' ';
 
-	return font->char_descriptors[value - font->char_start].width;
+	return ssd1306_charWidthInternal(font, value);
+}
+
+uint8_t ssd1306_stringWidth(font_info_t *font, unsigned char *str)
+{
+	if (font == NULL)
+		return 0;
+
+
+	uint8_t i;
+	int end = strlen(str);
+	int width = 0;
+	char ch, 
+		chStart = font->char_start, 
+		chEnd = font->char_end;
+
+	for (i = 0; i < end; i++)
+	{
+		ch = str[i];
+		if ((ch < chStart) || (ch > chEnd))
+			ch = ' ';
+		width += ssd1306_charWidthInternal(font, ch);
+	}
+
+	return width + font->c * (end > 0 ? end - 1 : 0);
 }
 
 // Draw a character
@@ -883,12 +875,8 @@ uint8_t ssd1306_drawChar(font_info_t *font, uint8_t x, uint8_t y, unsigned char 
 	{
 		for (i = 0; i < font->char_descriptors[c].width; ++i) 
 		{
-			//ssd1306_drawPixel(x + i, y + j, foreground);
-
 			if (i % 8 == 0) 
 			{
-				//line = bitmap[(font->char_descriptors[c].width + 7) / 8 * j + i / 8];     // line data
-				//unsigned char z = pgm_read_byte(bitmap + (font->char_descriptors[c].width + 7) / 8 * j + i / 8);
 				line = pgm_read_byte(bitmap + (font->char_descriptors[c].width + 7) / 8 * j + i / 8);
 			}
 			if (line & 0x80) 
