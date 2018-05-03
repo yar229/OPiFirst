@@ -1,5 +1,4 @@
-#include "fonts.h"
-
+#include "../fonts.h"
 /*
 **  Font data for Century 10pt
 */

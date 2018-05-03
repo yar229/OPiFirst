@@ -3,7 +3,7 @@
 *
 */
 
-#include "fonts.h"
+#include "../fonts.h"
 
 /* Standard ASCII 5x7 font */
 const uint8_t glcdru_5x7_bitmaps[] =

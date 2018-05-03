@@ -4,27 +4,48 @@
     <Object Include="ssd1306_i2c.o" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="consolas_24pt.c" />
-    <ClCompile Include="fonts.c" />
-    <ClCompile Include="font_glcd_5x7.c" />
-    <ClCompile Include="font_glcdru_5x7.c" />
-    <ClCompile Include="font_tahoma_8pt.c" />
-    <ClCompile Include="segoeUISemibold_24pt.c" />
     <ClCompile Include="ssd1306_i2c.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DrawDatetime.cpp" />
     <ClCompile Include="ThreadTimer.cpp" />
-    <ClCompile Include="consolas_11pt.c" />
-    <ClCompile Include="century_10pt.c" />
-    <ClCompile Include="century_11pt.c" />
+    <ClCompile Include="fonts\century_10pt.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\century_11pt.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\consolas_11pt.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\consolas_24pt.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\segoeUISemibold_24pt.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\glcd_5x7.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\glcdru_5x7.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts\tahoma_8pt.c">
+      <Filter>fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="fonts.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fonts.h" />
     <ClInclude Include="ssd1306_i2c.h" />
     <ClInclude Include="DrawDatetime.h" />
     <ClInclude Include="ThreadTimer.h" />
+    <ClInclude Include="fonts.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="fonts">
+      <UniqueIdentifier>{7b92ae5a-5941-42a2-875e-92ad7c800dcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

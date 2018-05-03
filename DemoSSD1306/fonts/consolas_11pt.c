@@ -1,4 +1,4 @@
-#include "fonts.h"
+#include "../fonts.h"
 
 /*
 **  Font data for Consolas 11pt
