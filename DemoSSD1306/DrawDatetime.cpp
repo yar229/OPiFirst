@@ -1,6 +1,6 @@
 #include <iostream>
-#include <thread>
 #include <chrono>
+#include <cstring>
 
 #ifdef __cplusplus
 extern "C"
@@ -17,50 +17,40 @@ using namespace std;
 using std::chrono::steady_clock;
 using std::chrono::system_clock;
 
-time_t steady_clock_to_time_t(steady_clock::time_point t)
-{
-	return system_clock::to_time_t(system_clock::now()
-		+ (t - steady_clock::now()));
-}
-
-void timer_start(std::function<void(time_t)> func, unsigned int interval)
-{
-	std::thread([func, interval]()
-	{
-		while (true)
-		{
-			auto time_point = std::chrono::steady_clock::now();
-			std::time_t now_c = steady_clock_to_time_t(time_point);
-
-			auto x = time_point + std::chrono::milliseconds(interval);
-			func(now_c);
-			std::this_thread::sleep_until(x);
-		}
-	}).detach();
-}
-
-char datebuffer[100];
-char timebuffer[26];
-char secbuffer[4];
-
-font_info_t* smallFont = (font_info_t *)(fonts[2]);
-font_info_t* bigFont = (font_info_t *)(fonts[4]);
-
-void PrintDatetime(std::time_t time)
+void DateTimePainter::PrintDatetime(std::time_t time)
 {
 	//ssd1306_drawPixel(5, 5, WHITE);
 
 	auto local = localtime(&time);
 
-	strftime(datebuffer, 100, "%a, %Y-%m-%d", local);
-	strftime(timebuffer, 26, "%H:%M", local);
-	strftime(secbuffer, 4, "%S", local);
+	if (_doFullRedraw) ssd1306_clearDisplay();
 
-	ssd1306_clearDisplay();
+	if (_doFullRedraw || _oldTime->tm_year != local->tm_year || _oldTime->tm_mon != local->tm_mon || _oldTime->tm_mday != local->tm_mday)
+	{	// draw year-month-day line
+		strftime(_printBuffer, 100, "%a, %Y-%m-%d", local);
+		ssd1306_drawString(_fontSmall, (unsigned char *)_printBuffer, _coordXDate, _coordYDate);
+	}
 
-	ssd1306_drawString(smallFont, (unsigned char *)datebuffer, 27, 5);
-	ssd1306_drawString(bigFont, (unsigned char *)timebuffer, 30, 15);
-	ssd1306_drawString(smallFont, (unsigned char *)secbuffer, 110, 15);
+	if (_doFullRedraw || _oldTime->tm_hour != local->tm_hour)
+		DrawNum2(_fontBig, local->tm_hour, _coordXHour, _coordYTime, _printBuffer);
+
+	if (_doFullRedraw)
+		ssd1306_drawString(_fontBig, (unsigned char *)":", _coordXHour, _coordYTime);
+
+	if (_doFullRedraw || _oldTime->tm_min != local->tm_min)
+		DrawNum2(_fontBig, local->tm_min, _coordXMinute, _coordYTime, _printBuffer);
+
+	if (_doFullRedraw || _oldTime->tm_sec != local->tm_sec)
+		DrawNum2(_fontSmall, local->tm_sec, _coordXSecond, _coordYTime, _printBuffer);
 
 	ssd1306_display();
+
+	memcpy(_oldTime, local, sizeof(struct tm));
 }
+
+inline void DateTimePainter::DrawNum2(font_info_t* font, int value, int x, int y, char *buffer)
+{
+	sprintf(buffer, "%02d", value);
+	ssd1306_drawString(font, (unsigned char *)buffer, _coordXHour, y);
+}
+

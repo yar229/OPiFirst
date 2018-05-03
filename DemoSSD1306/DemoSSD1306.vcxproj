@@ -57,6 +57,7 @@
     <ClCompile Include="font_glcd_5x7.c" />
     <ClCompile Include="font_glcdru_5x7.c" />
     <ClCompile Include="font_tahoma_8pt.c" />
+    <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="segoeUISemibold_24pt.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ssd1306_i2c.c" />
@@ -67,6 +68,7 @@
   <ItemGroup>
     <ClInclude Include="DrawDatetime.h" />
     <ClInclude Include="fonts.h" />
+    <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="ssd1306_i2c.h" />
   </ItemGroup>
   <ItemGroup>

@@ -363,12 +363,15 @@ void ssd1306_display(void)
 
 	// I2C
 	int i;
-	for (i = 0; i < (SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8); i++) {
+	for (i = 0; i < (SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8); i++) 
+	{
 		wiringPiI2CWriteReg8(i2cd, 0x40, buffer[i]); 
 		//This sends byte by byte. 
 		//Better to send all buffer without 0x40 first
 		//Should be optimized
 	}
+	//wiringPiI2CWriteBlock(i2cd, 0, 0x40, SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8, buffer);
+
 }
 
 // startscrollright

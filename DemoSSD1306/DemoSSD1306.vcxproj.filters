@@ -13,11 +13,13 @@
     <ClCompile Include="ssd1306_i2c.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DrawDatetime.cpp" />
+    <ClCompile Include="ThreadTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fonts.h" />
     <ClInclude Include="ssd1306_i2c.h" />
     <ClInclude Include="DrawDatetime.h" />
+    <ClInclude Include="ThreadTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
