@@ -17,7 +17,7 @@ class DateTimePainter
 		char _printBuffer[16];
 		tm* _oldTime = new tm();
 
-		font_info_t* _fontSmall = (font_info_t *)(fonts[5]); //[2]);
+		font_info_t* _fontSmall = (font_info_t *)(fonts[7]); //[2]);
 		font_info_t* _fontBig = (font_info_t *)(fonts[4]);
 
 		//symbol positions for monowidth font
