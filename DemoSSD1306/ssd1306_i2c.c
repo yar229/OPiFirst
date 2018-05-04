@@ -920,7 +920,7 @@ uint8_t ssd1306_drawChar(font_info_t *font, uint8_t x, uint8_t y, unsigned char 
 
 
 
-void ssd1306_drawBuffer(int *inputBuffer, int size)
+void ssd1306_copyBuffer(int *inputBuffer, int size)
 {
 	if (0 >= size)
 		return;
@@ -929,4 +929,18 @@ void ssd1306_drawBuffer(int *inputBuffer, int size)
 		size = SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8;
 
 	memcpy(&buffer, inputBuffer, size);
+}
+
+void ssd1306_drawBitmap(int16_t x, int16_t y, const int bitmap[], int16_t w, int16_t h, uint16_t color) 
+{
+	int16_t byteWidth = (w + 7) / 8; // Bitmap scanline pad = whole byte
+	uint8_t byte = 0;
+
+	for (int16_t j = 0; j<h; j++, y++) {
+		for (int16_t i = 0; i<w; i++) {
+			if (i & 7) byte <<= 1;
+			else      byte = pgm_read_byte(&bitmap[j * byteWidth + i / 8]);
+			if (byte & 0x80) ssd1306_drawPixel(x + i, y, color);
+		}
+	}
 }

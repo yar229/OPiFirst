@@ -70,6 +70,7 @@
     <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ssd1306_i2c.c" />
+    <ClCompile Include="WifiPainter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -80,9 +81,7 @@
     <ClInclude Include="StartPainter.h" />
     <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="ssd1306_i2c.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="ssd1306_i2c.o" />
+    <ClInclude Include="WifiPainter.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

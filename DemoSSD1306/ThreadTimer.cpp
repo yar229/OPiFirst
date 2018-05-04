@@ -12,6 +12,8 @@ ThreadTimer::ThreadTimer(std::function<void(time_t)> func, unsigned int interval
 	{
 		while (enabled)
 		{
+			this->InvokeCounter++;
+
 			auto time_point = std::chrono::steady_clock::now();
 			std::time_t now_c = steady_clock_to_time_t(time_point);
 

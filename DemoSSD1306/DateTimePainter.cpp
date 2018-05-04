@@ -57,8 +57,6 @@ void DateTimePainter::Draw(std::time_t time)
 	if (_doFullRedraw || _oldTime->tm_sec != local->tm_sec)
 		DrawNum2(_fontSmall, local->tm_sec, _coordXSecond, _coordYTime, _printBuffer);
 
-	ssd1306_display();
-
 	memcpy(_oldTime, local, sizeof(struct tm));
 }
 

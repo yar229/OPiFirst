@@ -12,6 +12,7 @@ class ThreadTimer
 		ThreadTimer(std::function<void(time_t)> func, unsigned int interval);
 		~ThreadTimer();
 
+		int InvokeCounter = 0;
 	private:
 
 		static time_t steady_clock_to_time_t(steady_clock::time_point t);

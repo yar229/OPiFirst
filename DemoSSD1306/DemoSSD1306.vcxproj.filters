@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Object Include="ssd1306_i2c.o" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="ssd1306_i2c.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ThreadTimer.cpp" />
@@ -32,15 +29,29 @@
       <Filter>fonts</Filter>
     </ClCompile>
     <ClCompile Include="fonts.c" />
-    <ClCompile Include="StartPainter.cpp" />
-    <ClCompile Include="DateTimePainter.cpp" />
+    <ClCompile Include="WifiPainter.cpp">
+      <Filter>painters</Filter>
+    </ClCompile>
+    <ClCompile Include="StartPainter.cpp">
+      <Filter>painters</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTimePainter.cpp">
+      <Filter>painters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
     <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="fonts.h" />
-    <ClInclude Include="StartPainter.h" />
-    <ClInclude Include="DateTimePainter.h" />
+    <ClInclude Include="WifiPainter.h">
+      <Filter>painters</Filter>
+    </ClInclude>
+    <ClInclude Include="StartPainter.h">
+      <Filter>painters</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTimePainter.h">
+      <Filter>painters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -48,6 +59,9 @@
   <ItemGroup>
     <Filter Include="fonts">
       <UniqueIdentifier>{7b92ae5a-5941-42a2-875e-92ad7c800dcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="painters">
+      <UniqueIdentifier>{be9e660c-8ed9-445c-a676-07561c3e7546}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
