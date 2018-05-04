@@ -178,6 +178,6 @@ uint8_t ssd1306_charWidth(font_info_t *font, char value);
 uint8_t ssd1306_stringWidth(font_info_t * font, unsigned char * str);
 
 void ssd1306_copyBuffer(int *inputBuffer, int size);
-void ssd1306_drawBitmap(int16_t x, int16_t y, const int bitmap[], int16_t w, int16_t h, uint16_t color);
+void ssd1306_drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint8_t foreColor, uint8_t backColor);
 
 #endif				/* _SSD1306_I2C_H_ */

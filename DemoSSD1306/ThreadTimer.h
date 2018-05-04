@@ -12,11 +12,14 @@ class ThreadTimer
 		ThreadTimer(std::function<void(time_t)> func, unsigned int interval);
 		~ThreadTimer();
 
-		int InvokeCounter = 0;
+		void Start();
+
 	private:
 
 		static time_t steady_clock_to_time_t(steady_clock::time_point t);
-		std::thread innerThread;
+		std::thread _innerThread;
+		std::function<void(time_t)> _func;
+		unsigned int _interval;
 		bool enabled = true;
 };
 

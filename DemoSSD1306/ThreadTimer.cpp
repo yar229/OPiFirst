@@ -8,29 +8,36 @@ using std::chrono::system_clock;
 
 ThreadTimer::ThreadTimer(std::function<void(time_t)> func, unsigned int interval)
 {
-	innerThread = std::thread([func, interval, this]()
-	{
-		while (enabled)
-		{
-			this->InvokeCounter++;
+	_func = func;
+	_interval = interval;
 
-			auto time_point = std::chrono::steady_clock::now();
-			std::time_t now_c = steady_clock_to_time_t(time_point);
-
-			auto x = time_point + std::chrono::milliseconds(interval);
-			func(now_c);
-			std::this_thread::sleep_until(x);
-		}
-	});
-	innerThread.detach();
 }
 
 
 ThreadTimer::~ThreadTimer()
 {
 	enabled = false;
-	innerThread.join();
+	_innerThread.join();
 }
+
+void ThreadTimer::Start()
+{
+	_innerThread = std::thread([this]()
+	{
+		while (enabled)
+		{
+			auto time_point = std::chrono::steady_clock::now();
+			std::time_t now_c = steady_clock_to_time_t(time_point);
+
+			auto x = time_point + std::chrono::milliseconds(this->_interval);
+			this->_func(now_c);
+			std::this_thread::sleep_until(x);
+		}
+	});
+	this->_innerThread.detach();
+}
+
+
 
 time_t ThreadTimer::steady_clock_to_time_t(steady_clock::time_point t)
 {
