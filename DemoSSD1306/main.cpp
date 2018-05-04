@@ -13,8 +13,6 @@ extern "C"
 }
 #endif
 
-
-
 int main()
 {
 	ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS);

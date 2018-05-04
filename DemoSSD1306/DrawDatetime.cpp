@@ -29,6 +29,8 @@ void DateTimePainter::PrintDatetime(std::time_t time)
 
 	if (_doFullRedraw || _oldTime->tm_year != local->tm_year || _oldTime->tm_mon != local->tm_mon || _oldTime->tm_mday != local->tm_mday)
 	{	// draw year-month-day line
+		ssd1306_fillRect(0, _coordYDate, _fontSmall->height, SSD1306_LCDWIDTH, BLACK); //dirty clean date string
+
 		strftime(_printBuffer, 100, "%a, %Y-%m-%d", local);
 		ssd1306_drawString(
 			_fontSmall, 
@@ -38,13 +40,19 @@ void DateTimePainter::PrintDatetime(std::time_t time)
 	}
 
 	if (_doFullRedraw || _oldTime->tm_hour != local->tm_hour)
+	{
+		ssd1306_fillRect(0, _coordYTime, _fontBig->height, _coordXColon, BLACK); //dirty clean time left part (hours)
 		DrawNum2(_fontBig, local->tm_hour, _coordXHour, _coordYTime, _printBuffer);
+	}
 
 	if (_doFullRedraw || 0 == _oldTime->tm_year)
 		ssd1306_drawString(_fontBig, (unsigned char *)":", _coordXColon, _coordYTime);
 
 	if (_doFullRedraw || _oldTime->tm_min != local->tm_min)
+	{
+		ssd1306_fillRect(_coordXMinute, _coordYTime, SSD1306_LCDWIDTH - _coordXMinute, _fontBig->height, BLACK); //dirty clean time right part (mins and secs)
 		DrawNum2(_fontBig, local->tm_min, _coordXMinute, _coordYTime, _printBuffer);
+	}
 
 	if (_doFullRedraw || _oldTime->tm_sec != local->tm_sec)
 		DrawNum2(_fontSmall, local->tm_sec, _coordXSecond, _coordYTime, _printBuffer);
