@@ -35,7 +35,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>wiringPi;pthread;glib-2.0;rt</LibraryDependencies>
+      <LibraryDependencies>wiringPi;pthread</LibraryDependencies>
     </Link>
     <RemotePostBuildEvent>
       <Command>
@@ -49,6 +49,11 @@
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <LibraryDependencies>wiringPi;pthread</LibraryDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DrawDatetime.cpp" />
