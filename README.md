@@ -3,4 +3,4 @@ Working with GPIO on `Orange Pi Plus 2`
 * [zhaolei/WiringOP](https://github.com/zhaolei/WiringOP)
 * Visual Studio 2017 with gdbserver remote debugging
 * [OLED font generator](https://github.com/pavius/the-dot-factory)
-* [Image to Adafruit OLED Bitmap Converter](http://www.majer.ch/lcd/adf_bitmap.php)
+* [LCD Assistant](http://en.radzio.dxp.pl/bitmap_converter/) (do not forget "horizontal" option)
