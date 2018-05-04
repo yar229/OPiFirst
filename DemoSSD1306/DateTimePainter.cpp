@@ -8,7 +8,7 @@ extern "C"
 #endif
 #include "ssd1306_i2c.h"
 #include "fonts.h"
-#include "DrawDatetime.h"
+#include "DateTimePainter.h"
 #ifdef __cplusplus
 }
 #endif
@@ -17,7 +17,7 @@ using namespace std;
 using std::chrono::steady_clock;
 using std::chrono::system_clock;
 
-void DateTimePainter::PrintDatetime(std::time_t time)
+void DateTimePainter::Draw(std::time_t time)
 {
 	// till there will be correct symbol width printing
 	//ssd1306_clearDisplay();

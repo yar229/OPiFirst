@@ -6,7 +6,6 @@
   <ItemGroup>
     <ClCompile Include="ssd1306_i2c.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="DrawDatetime.cpp" />
     <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="fonts\century_10pt.c">
       <Filter>fonts</Filter>
@@ -33,12 +32,15 @@
       <Filter>fonts</Filter>
     </ClCompile>
     <ClCompile Include="fonts.c" />
+    <ClCompile Include="StartPainter.cpp" />
+    <ClCompile Include="DateTimePainter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
-    <ClInclude Include="DrawDatetime.h" />
     <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="fonts.h" />
+    <ClInclude Include="StartPainter.h" />
+    <ClInclude Include="DateTimePainter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

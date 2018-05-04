@@ -6,7 +6,7 @@ class DateTimePainter
 {
 	public:
 
-		void PrintDatetime(std::time_t time);
+		void Draw(std::time_t time);
 
 	private:
 

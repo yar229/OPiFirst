@@ -8,7 +8,8 @@ extern "C"
 {
 #endif
 	#include "ssd1306_i2c.h"
-	#include "DrawDatetime.h"	
+	#include "DateTimePainter.h"	
+	#include "StartPainter.h"
 #ifdef __cplusplus
 }
 #endif
@@ -26,12 +27,17 @@ int main()
 	{
 		//clock_t start = clock();
 
-		dateTimePainter->PrintDatetime(t);
+		dateTimePainter->Draw(t);
 		
 		//clock_t stop = clock();
 		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
 		//printf("Time elapsed in ms: %f", elapsed);
 	}, 1000);
+
+	auto startPainter = new StartPainter();
+	startPainter->Draw();
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	delete startPainter;
 
 	while (true)
 	{

@@ -177,4 +177,6 @@ uint8_t ssd1306_drawChar(font_info_t *font, uint8_t x, uint8_t y, unsigned char 
 uint8_t ssd1306_charWidth(font_info_t *font, char value);
 uint8_t ssd1306_stringWidth(font_info_t * font, unsigned char * str);
 
+void ssd1306_drawBuffer(int *inputBuffer, int size);
+
 #endif				/* _SSD1306_I2C_H_ */

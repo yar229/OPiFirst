@@ -917,3 +917,16 @@ uint8_t ssd1306_drawChar(font_info_t *font, uint8_t x, uint8_t y, unsigned char 
 	}
 	return (font->char_descriptors[c].width);
 }
+
+
+
+void ssd1306_drawBuffer(int *inputBuffer, int size)
+{
+	if (0 >= size)
+		return;
+
+	if (size > SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8)
+		size = SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8;
+
+	memcpy(&buffer, inputBuffer, size);
+}
