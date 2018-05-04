@@ -20,8 +20,8 @@ using std::chrono::system_clock;
 void DateTimePainter::PrintDatetime(std::time_t time)
 {
 	// till there will be correct symbol width printing
-	ssd1306_clearDisplay();
-	_doFullRedraw = true;
+	//ssd1306_clearDisplay();
+	//_doFullRedraw = true;
 
 	auto local = localtime(&time);
 

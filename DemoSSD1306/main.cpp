@@ -24,7 +24,16 @@ int main()
 	ssd1306_clearDisplay();
 
 	auto dateTimePainter = new DateTimePainter();
-	auto timer = new ThreadTimer([=](time_t t) { dateTimePainter->PrintDatetime(t); }, 1000);
+	auto timer = new ThreadTimer([=](time_t t)
+	{
+		//clock_t start = clock();
+
+		dateTimePainter->PrintDatetime(t);
+		
+		//clock_t stop = clock();
+		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+		//printf("Time elapsed in ms: %f", elapsed);
+	}, 1000);
 
 	while (true)
 	{

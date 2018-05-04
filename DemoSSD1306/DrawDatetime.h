@@ -27,7 +27,6 @@ class DateTimePainter
 		const uint8_t _widthCharBig = ssd1306_charWidth(_fontBig, '0');
 		const uint8_t _widthCharBigColon = ssd1306_charWidth(_fontBig, ':');
 
-
 		const uint8_t _coordXHour = SSD1306_LCDWIDTH / 2 - _fontBig->c - 2 * _widthCharBig - _widthCharBigColon / 2;
 		const uint8_t _coordXColon = SSD1306_LCDWIDTH / 2 - _widthCharBigColon / 2;
 		const uint8_t _coordXMinute = SSD1306_LCDWIDTH / 2 + _widthCharBigColon / 2 + _fontBig->c;
