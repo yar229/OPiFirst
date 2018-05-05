@@ -1,12 +1,12 @@
 #include <thread>
 
-#include "ThreadTimer.h"
+#include "TimerSignaller.h"
 
 using namespace std;
 using std::chrono::steady_clock;
 using std::chrono::system_clock;
 
-ThreadTimer::ThreadTimer(std::function<void(time_t)> func, unsigned int interval)
+TimerSignaller::TimerSignaller(std::function<void(time_t)> func, unsigned int interval)
 {
 	_func = func;
 	_interval = interval;
@@ -14,13 +14,13 @@ ThreadTimer::ThreadTimer(std::function<void(time_t)> func, unsigned int interval
 }
 
 
-ThreadTimer::~ThreadTimer()
+TimerSignaller::~TimerSignaller()
 {
 	enabled = false;
 	_innerThread.join();
 }
 
-void ThreadTimer::Start()
+void TimerSignaller::Start()
 {
 	_innerThread = std::thread([this]()
 	{
@@ -39,7 +39,7 @@ void ThreadTimer::Start()
 
 
 
-time_t ThreadTimer::steady_clock_to_time_t(steady_clock::time_point t)
+time_t TimerSignaller::steady_clock_to_time_t(steady_clock::time_point t)
 {
 	return system_clock::to_time_t(system_clock::now()
 		+ (t - steady_clock::now()));

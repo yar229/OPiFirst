@@ -9,7 +9,7 @@ extern "C"
 	#include <wiringPi.h>
 	#include "ssd1306_i2c.h"
 
-	#include "ThreadTimer.h"
+	#include "TimerSignaller.h"
 	#include "PinSignaller.h"
 	
 	#include "VolumePainter.h"	
@@ -37,7 +37,7 @@ int main()
 	DateTimePainter* dateTimePainter = new DateTimePainter();
 	int dateTimeInvokeCounter = 0;
 	WifiPainter* wifiPainter = new WifiPainter();
-	ThreadTimer* dateTimeTimer = new ThreadTimer([&dateTimeInvokeCounter, dateTimePainter, wifiPainter](time_t t)
+	TimerSignaller* dateTimeTimer = new TimerSignaller([&dateTimeInvokeCounter, dateTimePainter, wifiPainter](time_t t)
 	{
 		//clock_t start = clock();
 

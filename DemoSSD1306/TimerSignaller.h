@@ -5,12 +5,12 @@
 using namespace std;
 using std::chrono::steady_clock;
 
-class ThreadTimer
+class TimerSignaller
 {
 	public:
 
-		ThreadTimer(std::function<void(time_t)> func, unsigned int interval);
-		~ThreadTimer();
+		TimerSignaller(std::function<void(time_t)> func, unsigned int interval);
+		~TimerSignaller();
 
 		void Start();
 

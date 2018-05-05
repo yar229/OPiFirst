@@ -40,10 +40,10 @@
     <ClCompile Include="PinSignaller.cpp">
       <Filter>signallers</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadTimer.cpp">
+    <ClCompile Include="VolumePainter.cpp" />
+    <ClCompile Include="TimerSignaller.cpp">
       <Filter>signallers</Filter>
     </ClCompile>
-    <ClCompile Include="VolumePainter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
@@ -60,11 +60,11 @@
     <ClInclude Include="PinSignaller.h">
       <Filter>signallers</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadTimer.h">
-      <Filter>signallers</Filter>
-    </ClInclude>
     <ClInclude Include="callbackMethod.h" />
     <ClInclude Include="VolumePainter.h" />
+    <ClInclude Include="TimerSignaller.h">
+      <Filter>signallers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

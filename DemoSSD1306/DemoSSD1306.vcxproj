@@ -68,7 +68,7 @@
     <ClCompile Include="fonts\segoeUISemibold_24pt.c" />
     <ClCompile Include="PinSignaller.cpp" />
     <ClCompile Include="StartPainter.cpp" />
-    <ClCompile Include="ThreadTimer.cpp" />
+    <ClCompile Include="TimerSignaller.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ssd1306_i2c.c" />
     <ClCompile Include="VolumePainter.cpp" />
@@ -83,7 +83,7 @@
     <ClInclude Include="fonts.h" />
     <ClInclude Include="PinSignaller.h" />
     <ClInclude Include="StartPainter.h" />
-    <ClInclude Include="ThreadTimer.h" />
+    <ClInclude Include="TimerSignaller.h" />
     <ClInclude Include="ssd1306_i2c.h" />
     <ClInclude Include="VolumePainter.h" />
     <ClInclude Include="WifiPainter.h" />
