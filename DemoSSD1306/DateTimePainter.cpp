@@ -19,14 +19,6 @@ using std::chrono::system_clock;
 
 void DateTimePainter::Draw(std::time_t time)
 {
-	//ssd1306_fillRect(0, 0, 10, 10, WHITE);
-	//ssd1306_fillRect(117, 53, 10, 10, WHITE);
-	//return;
-
-	// till there will be correct symbol width printing
-	//ssd1306_clearDisplay();
-	//_doFullRedraw = true;
-
 	auto local = localtime(&time);
 
 	if (_doFullRedraw) ssd1306_clearDisplay();

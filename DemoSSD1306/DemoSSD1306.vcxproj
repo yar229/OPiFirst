@@ -66,21 +66,26 @@
     <ClCompile Include="fonts\glcdru_5x7.c" />
     <ClCompile Include="fonts\glcd_5x7.c" />
     <ClCompile Include="fonts\segoeUISemibold_24pt.c" />
+    <ClCompile Include="PinSignaller.cpp" />
     <ClCompile Include="StartPainter.cpp" />
     <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ssd1306_i2c.c" />
+    <ClCompile Include="VolumePainter.cpp" />
     <ClCompile Include="WifiPainter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="callbackMethod.h" />
     <ClInclude Include="DateTimePainter.h" />
     <ClInclude Include="fonts.h" />
+    <ClInclude Include="PinSignaller.h" />
     <ClInclude Include="StartPainter.h" />
     <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="ssd1306_i2c.h" />
+    <ClInclude Include="VolumePainter.h" />
     <ClInclude Include="WifiPainter.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

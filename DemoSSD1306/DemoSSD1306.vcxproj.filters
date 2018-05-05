@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="ssd1306_i2c.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="fonts\century_10pt.c">
       <Filter>fonts</Filter>
     </ClCompile>
@@ -38,10 +37,16 @@
     <ClCompile Include="DateTimePainter.cpp">
       <Filter>painters</Filter>
     </ClCompile>
+    <ClCompile Include="PinSignaller.cpp">
+      <Filter>signallers</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadTimer.cpp">
+      <Filter>signallers</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumePainter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
-    <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="fonts.h" />
     <ClInclude Include="WifiPainter.h">
       <Filter>painters</Filter>
@@ -52,6 +57,14 @@
     <ClInclude Include="DateTimePainter.h">
       <Filter>painters</Filter>
     </ClInclude>
+    <ClInclude Include="PinSignaller.h">
+      <Filter>signallers</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadTimer.h">
+      <Filter>signallers</Filter>
+    </ClInclude>
+    <ClInclude Include="callbackMethod.h" />
+    <ClInclude Include="VolumePainter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -62,6 +75,9 @@
     </Filter>
     <Filter Include="painters">
       <UniqueIdentifier>{be9e660c-8ed9-445c-a676-07561c3e7546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="signallers">
+      <UniqueIdentifier>{d3a9514e-7cda-4e85-bed6-e4dc4c3015eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

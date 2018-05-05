@@ -1,13 +1,18 @@
 #include <thread>
 #include <chrono>
 #include <time.h>
-#include "ThreadTimer.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+	#include <wiringPi.h>
 	#include "ssd1306_i2c.h"
+
+	#include "ThreadTimer.h"
+	#include "PinSignaller.h"
+	
+	#include "VolumePainter.h"	
 	#include "DateTimePainter.h"	
 	#include "StartPainter.h"
 	#include "WifiPainter.h"
@@ -48,6 +53,16 @@ int main()
 		//printf("Time elapsed in ms: %f", elapsed);
 	}, 1000);
 	dateTimeTimer->Start();
+	//========================================================================================================
+
+	//=== button pressed =====================================================================================
+	wiringPiSetup();
+	VolumePainter* volumePainter = new VolumePainter();
+	PinSignaller* pinSignaller = new PinSignaller(0, INT_EDGE_FALLING, [volumePainter, pinSignaller]()
+	{
+		volumePainter->Draw(pinSignaller->SignalCounter);
+	});
+	pinSignaller->Start();
 	//========================================================================================================
 
 	while (true)
