@@ -31,14 +31,24 @@ typedef void(*callback_t)();
 
 void PinSignaller::Start()
 {
+	//pinMode(_pin, INPUT);
+
 	Callback<void()>::func = std::bind(&PinSignaller::CallbackWrapper, this);
 	callback_t func = static_cast<callback_t>(Callback<void()>::callback);
 
 	wiringPiISR(_pin, _mode, func);
+
 }
 
 void PinSignaller::CallbackWrapper()
 {
-	SignalCounter++;
-	_callback();
+	auto pinState = digitalRead(_pin);
+	if (
+			(_mode == INT_EDGE_RISING && pinState == HIGH) ||
+			(_mode == INT_EDGE_FALLING && pinState == LOW)
+		)
+	{
+		_callback();
+	}
+
 }

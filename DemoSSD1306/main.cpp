@@ -20,8 +20,34 @@ extern "C"
 }
 #endif
 
+void myInterrupt7(void) 
+{
+
+	//pinMode(7, INPUT);
+}
+
 int main()
 {
+	if (wiringPiSetup() < 0) 
+	{
+		fprintf(stderr, "Unable to setup wiringPi: %s\n", errno);
+		return 1;
+	}
+	////pinMode(7, INPUT);
+	//if (wiringPiISR(7, INT_EDGE_FALLING, &myInterrupt7) < 0)
+	//{
+	//	fprintf(stderr, "Unable to setup ISR: %s\n", errno);
+	//	return 1;
+	//}
+
+	//while (true)
+	//{
+	//	std::this_thread::sleep_for(std::chrono::seconds(5));
+	//}
+
+	//return 0;
+
+
 	ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS);
 	ssd1306_clearDisplay();
 
@@ -56,13 +82,16 @@ int main()
 	//========================================================================================================
 
 	//=== button pressed =====================================================================================
-	wiringPiSetup();
+	int signalCounter = 0;
+	int *pSignalcounter = &signalCounter;
 	VolumePainter* volumePainter = new VolumePainter();
-	PinSignaller* pinSignaller = new PinSignaller(0, INT_EDGE_FALLING, [volumePainter, pinSignaller]()
+	PinSignaller* pinSignaller = new PinSignaller(7, INT_EDGE_FALLING, [volumePainter, pSignalcounter]()
 	{
-		volumePainter->Draw(pinSignaller->SignalCounter);
+		volumePainter->Draw((*pSignalcounter)++);
 	});
 	pinSignaller->Start();
+
+	//wiringPiISR(7, INT_EDGE_FALLING, &myInterrupt7);
 	//========================================================================================================
 
 	while (true)

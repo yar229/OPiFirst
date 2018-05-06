@@ -13,8 +13,6 @@ class PinSignaller
 
 		void Start();
 
-		int SignalCounter = 0;
-
 	private:
 
 		void CallbackWrapper();
