@@ -1,23 +1,18 @@
 #pragma once
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-#include "ssd1306_i2c.h"
-#ifdef __cplusplus
-}
-#endif
+#include "OledDisplay.h"
 
 class StartPainter
 {
 	public:
-		StartPainter();
+		StartPainter(OledDisplay * display);
 		~StartPainter();
 
 		void Draw();
 
 	private:
+		OledDisplay * _display;
+
 		const unsigned char _buffer[128 * 64 / 8] =
 		{
 			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

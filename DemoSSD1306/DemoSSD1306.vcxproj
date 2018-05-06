@@ -66,6 +66,7 @@
     <ClCompile Include="fonts\glcdru_5x7.c" />
     <ClCompile Include="fonts\glcd_5x7.c" />
     <ClCompile Include="fonts\segoeUISemibold_24pt.c" />
+    <ClCompile Include="OledDisplay.cpp" />
     <ClCompile Include="PinSignaller.cpp" />
     <ClCompile Include="StartPainter.cpp" />
     <ClCompile Include="TimerSignaller.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="callbackMethod.h" />
     <ClInclude Include="DateTimePainter.h" />
     <ClInclude Include="fonts.h" />
+    <ClInclude Include="OledDisplay.h" />
     <ClInclude Include="PinSignaller.h" />
     <ClInclude Include="StartPainter.h" />
     <ClInclude Include="TimerSignaller.h" />

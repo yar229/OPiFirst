@@ -2,8 +2,9 @@
 
 
 
-StartPainter::StartPainter()
+StartPainter::StartPainter(OledDisplay *display)
 {
+	_display = display;
 }
 
 
@@ -13,6 +14,5 @@ StartPainter::~StartPainter()
 
 void StartPainter::Draw()
 {
-	//ssd1306_copyBuffer((int *)_buffer, SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8);
-	ssd1306_drawBitmap(0, 0, _buffer, SSD1306_LCDWIDTH, SSD1306_LCDHEIGHT, WHITE, BLACK);
+	_display->DrawBitmap(0, 0, _buffer, _display->Width, _display->Height, WHITE, BLACK);
 }

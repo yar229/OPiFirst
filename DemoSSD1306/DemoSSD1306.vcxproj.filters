@@ -40,9 +40,12 @@
     <ClCompile Include="PinSignaller.cpp">
       <Filter>signallers</Filter>
     </ClCompile>
-    <ClCompile Include="VolumePainter.cpp" />
     <ClCompile Include="TimerSignaller.cpp">
       <Filter>signallers</Filter>
+    </ClCompile>
+    <ClCompile Include="OledDisplay.cpp" />
+    <ClCompile Include="VolumePainter.cpp">
+      <Filter>painters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,9 +64,12 @@
       <Filter>signallers</Filter>
     </ClInclude>
     <ClInclude Include="callbackMethod.h" />
-    <ClInclude Include="VolumePainter.h" />
     <ClInclude Include="TimerSignaller.h">
       <Filter>signallers</Filter>
+    </ClInclude>
+    <ClInclude Include="OledDisplay.h" />
+    <ClInclude Include="VolumePainter.h">
+      <Filter>painters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

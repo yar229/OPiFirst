@@ -12,8 +12,9 @@ extern "C"
 }
 #endif
 
-VolumePainter::VolumePainter()
+VolumePainter::VolumePainter(OledDisplay *display)
 {
+	_display = display;
 }
 
 
@@ -25,5 +26,5 @@ VolumePainter::~VolumePainter()
 void VolumePainter::Draw(int num)
 {
 	sprintf(_printBuffer, "%02d", num);
-	ssd1306_drawString(_fontBig, (unsigned char *)_printBuffer, 0, 0);
+	_display->DrawString(_fontBig, (unsigned char *)_printBuffer, 0, 0);
 }

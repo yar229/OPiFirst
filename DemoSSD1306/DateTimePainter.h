@@ -1,14 +1,20 @@
 #pragma once
 
+#include "OledDisplay.h"
 #include <chrono>
 
 class DateTimePainter
 {
 	public:
+		DateTimePainter(OledDisplay * display);
+		~DateTimePainter();
 
 		void Draw(std::time_t time);
 
 	private:
+		OledDisplay *_display;
+
+		bool _firstDraw = true;
 
 		inline void DrawNum2(font_info_t* font, int value, int x, int y, char *buffer);
 

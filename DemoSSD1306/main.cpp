@@ -12,6 +12,7 @@ extern "C"
 	#include "TimerSignaller.h"
 	#include "PinSignaller.h"
 	
+	#include "OledDisplay.h"
 	#include "VolumePainter.h"	
 	#include "DateTimePainter.h"	
 	#include "StartPainter.h"
@@ -20,11 +21,6 @@ extern "C"
 }
 #endif
 
-void myInterrupt7(void) 
-{
-
-	//pinMode(7, INPUT);
-}
 
 int main()
 {
@@ -33,37 +29,28 @@ int main()
 		fprintf(stderr, "Unable to setup wiringPi: %s\n", errno);
 		return 1;
 	}
-	////pinMode(7, INPUT);
-	//if (wiringPiISR(7, INT_EDGE_FALLING, &myInterrupt7) < 0)
-	//{
-	//	fprintf(stderr, "Unable to setup ISR: %s\n", errno);
-	//	return 1;
-	//}
 
-	//while (true)
-	//{
-	//	std::this_thread::sleep_for(std::chrono::seconds(5));
-	//}
+	//ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS);
+	//ssd1306_clearDisplay();
 
-	//return 0;
-
-
-	ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS);
-	ssd1306_clearDisplay();
+	OledDisplay* display = new OledDisplay();
+	display->UpsideDown(true);
 
 	//=== draw start image ===================================================================================
-	auto startPainter = new StartPainter();
+
+	auto startPainter = new StartPainter(display);
 	startPainter->Draw();
-	ssd1306_display();
-	ssd1306_clearDisplay();
+	display->Display();
+	display->ClearDisplay();
 	std::this_thread::sleep_for(std::chrono::seconds(3));
 	delete startPainter;
 
 	//=== draw date/time/WiFi on timer =======================================================================
-	DateTimePainter* dateTimePainter = new DateTimePainter();
-	int dateTimeInvokeCounter = 0;
-	WifiPainter* wifiPainter = new WifiPainter();
-	TimerSignaller* dateTimeTimer = new TimerSignaller([&dateTimeInvokeCounter, dateTimePainter, wifiPainter](time_t t)
+
+	DateTimePainter* dateTimePainter = new DateTimePainter(display);
+	volatile int dateTimeInvokeCounter = 0;
+	WifiPainter* wifiPainter = new WifiPainter(display);
+	TimerSignaller* timeSignaller = new TimerSignaller([display, dateTimePainter, wifiPainter, &dateTimeInvokeCounter](time_t t)
 	{
 		//clock_t start = clock();
 
@@ -72,26 +59,25 @@ int main()
 		if (dateTimeInvokeCounter++ % 5 == 0)
 			wifiPainter->Draw();
 
-		ssd1306_display();
+		display->Display();
 
 		//clock_t stop = clock();
 		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
 		//printf("Time elapsed in ms: %f", elapsed);
 	}, 1000);
-	dateTimeTimer->Start();
+	timeSignaller->Start();
 	//========================================================================================================
 
 	//=== button pressed =====================================================================================
-	int signalCounter = 0;
-	int *pSignalcounter = &signalCounter;
-	VolumePainter* volumePainter = new VolumePainter();
-	PinSignaller* pinSignaller = new PinSignaller(7, INT_EDGE_FALLING, [volumePainter, pSignalcounter]()
+
+	volatile int signalCounter = 0;
+	VolumePainter* volumePainter = new VolumePainter(display);
+	PinSignaller* pinSignaller = new PinSignaller(7, INT_EDGE_FALLING, [display, volumePainter, &signalCounter]()
 	{
-		volumePainter->Draw((*pSignalcounter)++);
+		volumePainter->Draw(signalCounter++);
+		display->Display();
 	});
 	pinSignaller->Start();
-
-	//wiringPiISR(7, INT_EDGE_FALLING, &myInterrupt7);
 	//========================================================================================================
 
 	while (true)
@@ -99,6 +85,6 @@ int main()
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
 
-	delete dateTimeTimer;
+	delete timeSignaller;
 	delete dateTimePainter;
 }

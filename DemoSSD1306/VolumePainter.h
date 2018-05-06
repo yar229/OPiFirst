@@ -1,5 +1,7 @@
 #pragma once
 
+#include "OledDisplay.h"
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -12,11 +14,14 @@ extern "C"
 class VolumePainter
 {
 	public:
-		VolumePainter();
+		VolumePainter(OledDisplay *display);
 		~VolumePainter();
+
 		void Draw(int num);
 
 	private:
+		OledDisplay * _display;
+
 		font_info_t * _fontBig = (font_info_t *)(fonts[4]);
 		char _printBuffer[4];
 };
