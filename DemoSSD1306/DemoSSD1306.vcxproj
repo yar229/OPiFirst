@@ -68,6 +68,7 @@
     <ClCompile Include="fonts\segoeUISemibold_24pt.c" />
     <ClCompile Include="OledDisplay.cpp" />
     <ClCompile Include="PinSignaller.cpp" />
+    <ClCompile Include="RotatorSignaller.cpp" />
     <ClCompile Include="StartPainter.cpp" />
     <ClCompile Include="TimerSignaller.cpp" />
     <ClCompile Include="main.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="fonts.h" />
     <ClInclude Include="OledDisplay.h" />
     <ClInclude Include="PinSignaller.h" />
+    <ClInclude Include="RotatorSignaller.h" />
     <ClInclude Include="StartPainter.h" />
     <ClInclude Include="TimerSignaller.h" />
     <ClInclude Include="ssd1306_i2c.h" />

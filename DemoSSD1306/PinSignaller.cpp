@@ -15,7 +15,7 @@ extern "C"
 #endif
 
 
-PinSignaller::PinSignaller(int pin, int mode, std::function<void(void)> callback)
+PinSignaller::PinSignaller(int pin, int mode, std::function<void(int, int)> callback)
 {
 	_pin = pin;
 	_mode = mode;
@@ -42,13 +42,13 @@ void PinSignaller::Start()
 
 void PinSignaller::CallbackWrapper()
 {
-	auto pinState = digitalRead(_pin);
+	int pinState = digitalRead(_pin);
 	if (
-			(_mode == INT_EDGE_RISING && pinState == HIGH) ||
-			(_mode == INT_EDGE_FALLING && pinState == LOW)
+			(_mode && INT_EDGE_RISING && pinState == HIGH) ||
+			(_mode && INT_EDGE_FALLING && pinState == LOW)
 		)
 	{
-		_callback();
+		_callback(_pin, pinState);
 	}
 
 }

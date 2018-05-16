@@ -47,6 +47,7 @@
     <ClCompile Include="VolumePainter.cpp">
       <Filter>painters</Filter>
     </ClCompile>
+    <ClCompile Include="RotatorSignaller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
@@ -71,6 +72,7 @@
     <ClInclude Include="VolumePainter.h">
       <Filter>painters</Filter>
     </ClInclude>
+    <ClInclude Include="RotatorSignaller.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

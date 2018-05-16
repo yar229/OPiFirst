@@ -72,7 +72,7 @@ int main()
 
 	volatile int signalCounter = 0;
 	VolumePainter* volumePainter = new VolumePainter(display);
-	PinSignaller* pinSignaller = new PinSignaller(7, INT_EDGE_FALLING, [display, volumePainter, &signalCounter]()
+	PinSignaller* pinSignaller = new PinSignaller(7, INT_EDGE_FALLING, [display, volumePainter, &signalCounter](int pin, int buttonState)
 	{
 		volumePainter->Draw(signalCounter++);
 		display->Display();
