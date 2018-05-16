@@ -1,8 +1,9 @@
 #pragma once
 #include <functional>
+#include "BaseSignaller.h"
 #include "PinSignaller.h"
 
-class RotatorSignaller
+class RotatorSignaller : BaseSignaller
 {
 public:
 	RotatorSignaller(int pinLeft, int pinRight, std::function<void(int)> callback);

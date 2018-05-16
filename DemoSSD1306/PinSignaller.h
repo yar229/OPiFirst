@@ -1,10 +1,11 @@
 #pragma once
 
+#include "BaseSignaller.h"
 #include <functional>
 
 using namespace std;
 
-class PinSignaller
+class PinSignaller : BaseSignaller
 {
 	public:
 

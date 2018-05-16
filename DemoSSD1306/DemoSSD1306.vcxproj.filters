@@ -47,7 +47,12 @@
     <ClCompile Include="VolumePainter.cpp">
       <Filter>painters</Filter>
     </ClCompile>
-    <ClCompile Include="RotatorSignaller.cpp" />
+    <ClCompile Include="BaseSignaller.cpp">
+      <Filter>signallers</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorSignaller.cpp">
+      <Filter>signallers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
@@ -72,7 +77,12 @@
     <ClInclude Include="VolumePainter.h">
       <Filter>painters</Filter>
     </ClInclude>
-    <ClInclude Include="RotatorSignaller.h" />
+    <ClInclude Include="BaseSignaller.h">
+      <Filter>signallers</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatorSignaller.h">
+      <Filter>signallers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

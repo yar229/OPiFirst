@@ -1,11 +1,12 @@
 #pragma once
+#include "BaseSignaller.h"
 
 #include <chrono>
 
 using namespace std;
 using std::chrono::steady_clock;
 
-class TimerSignaller
+class TimerSignaller : BaseSignaller
 {
 	public:
 
