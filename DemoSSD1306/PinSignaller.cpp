@@ -36,8 +36,13 @@ void PinSignaller::Start()
 	Callback<void()>::func = std::bind(&PinSignaller::CallbackWrapper, this);
 	callback_t func = static_cast<callback_t>(Callback<void()>::callback);
 
-	wiringPiISR(_pin, _mode, func);
+	//try resistors...
+	if (_mode && INT_EDGE_FALLING)
+		pullUpDnControl(_pin, PUD_DOWN);
+	else if (_mode && INT_EDGE_RISING)
+		pullUpDnControl(_pin, PUD_UP);
 
+	wiringPiISR(_pin, _mode, func);
 }
 
 void PinSignaller::CallbackWrapper()
