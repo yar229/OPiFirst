@@ -53,6 +53,7 @@
     <ClCompile Include="RotatorSignaller.cpp">
       <Filter>signallers</Filter>
     </ClCompile>
+    <ClCompile Include="SdlTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />

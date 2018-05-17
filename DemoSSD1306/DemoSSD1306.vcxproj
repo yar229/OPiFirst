@@ -35,7 +35,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>wiringPi;pthread</LibraryDependencies>
+      <LibraryDependencies>wiringPi;pthread;SDLmain;SDL</LibraryDependencies>
     </Link>
     <RemotePostBuildEvent>
       <Command>
@@ -70,6 +70,7 @@
     <ClCompile Include="OledDisplay.cpp" />
     <ClCompile Include="PinSignaller.cpp" />
     <ClCompile Include="RotatorSignaller.cpp" />
+    <ClCompile Include="SdlTest.cpp" />
     <ClCompile Include="StartPainter.cpp" />
     <ClCompile Include="TimerSignaller.cpp" />
     <ClCompile Include="main.cpp" />
