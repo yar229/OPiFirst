@@ -22,7 +22,7 @@ extern "C"
 #endif
 
 
-int main()
+int main1()
 {
 	if (wiringPiSetup() < 0) 
 	{
