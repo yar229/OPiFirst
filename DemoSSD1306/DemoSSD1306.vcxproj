@@ -67,6 +67,7 @@
     <ClCompile Include="fonts\glcdru_5x7.c" />
     <ClCompile Include="fonts\glcd_5x7.c" />
     <ClCompile Include="fonts\segoeUISemibold_24pt.c" />
+    <ClCompile Include="LvglScreen.cpp" />
     <ClCompile Include="lvgl\lv_core\lv_group.c" />
     <ClCompile Include="lvgl\lv_core\lv_indev.c" />
     <ClCompile Include="lvgl\lv_core\lv_obj.c" />
@@ -171,6 +172,7 @@
     <ClInclude Include="callbackMethod.h" />
     <ClInclude Include="DateTimePainter.h" />
     <ClInclude Include="fonts.h" />
+    <ClInclude Include="LvglScreen.h" />
     <ClInclude Include="lvgl\lvgl.h" />
     <ClInclude Include="lvgl\lv_conf_templ.h" />
     <ClInclude Include="lvgl\lv_core\lv_group.h" />

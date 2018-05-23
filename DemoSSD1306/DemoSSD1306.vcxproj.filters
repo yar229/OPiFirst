@@ -309,6 +309,7 @@
       <Filter>LittlevGL</Filter>
     </ClCompile>
     <ClCompile Include="lvgl_test.cpp" />
+    <ClCompile Include="LvglScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ssd1306_i2c.h" />
@@ -563,6 +564,7 @@
     </ClInclude>
     <ClInclude Include="lv_conf.h" />
     <ClInclude Include="lv_drv_conf.h" />
+    <ClInclude Include="LvglScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

@@ -6,8 +6,10 @@
 extern "C"
 {
 #endif
-	#include <wiringPi.h>
-	#include "ssd1306_i2c.h"
+	#include "LvglScreen.h"
+
+	//#include <wiringPi.h>
+	//#include "ssd1306_i2c.h"
 
 	#include "TimerSignaller.h"
 	#include "PinSignaller.h"
@@ -22,8 +24,40 @@ extern "C"
 #endif
 
 
-int main1()
+int main()
 {
+	LvglScreen* screen = new LvglScreen();
+
+	DateTimePainter* dateTimePainter = new DateTimePainter(screen);
+	volatile int dateTimeInvokeCounter = 0;
+	//WifiPainter* wifiPainter = new WifiPainter(display);
+	TimerSignaller* timeSignaller = new TimerSignaller([dateTimePainter, /*wifiPainter,*/ &dateTimeInvokeCounter](time_t t)
+	{
+		//clock_t start = clock();
+
+		dateTimePainter->Draw(t);
+
+		//if (dateTimeInvokeCounter++ % 5 == 0)
+		//	wifiPainter->Draw();
+
+		/*display->Display();*/
+
+		//clock_t stop = clock();
+		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+		//printf("Time elapsed in ms: %f", elapsed);
+	}, 1000);
+	timeSignaller->Start();
+
+	while (true)
+	{
+		std::this_thread::sleep_for(std::chrono::seconds(5));
+	}
+
+	delete timeSignaller;
+	delete dateTimePainter;
+
+
+	/* OLD 
 	if (wiringPiSetup() < 0) 
 	{
 		fprintf(stderr, "Unable to setup wiringPi: %s\n", errno);
@@ -47,25 +81,25 @@ int main1()
 
 	//=== draw date/time/WiFi on timer =======================================================================
 
-	DateTimePainter* dateTimePainter = new DateTimePainter(display);
-	volatile int dateTimeInvokeCounter = 0;
-	WifiPainter* wifiPainter = new WifiPainter(display);
-	TimerSignaller* timeSignaller = new TimerSignaller([display, dateTimePainter, wifiPainter, &dateTimeInvokeCounter](time_t t)
-	{
-		//clock_t start = clock();
+	//DateTimePainter* dateTimePainter = new DateTimePainter(display);
+	//volatile int dateTimeInvokeCounter = 0;
+	//WifiPainter* wifiPainter = new WifiPainter(display);
+	//TimerSignaller* timeSignaller = new TimerSignaller([display, dateTimePainter, wifiPainter, &dateTimeInvokeCounter](time_t t)
+	//{
+	//	//clock_t start = clock();
 
-		dateTimePainter->Draw(t);
-		
-		if (dateTimeInvokeCounter++ % 5 == 0)
-			wifiPainter->Draw();
+	//	dateTimePainter->Draw(t);
+	//	
+	//	if (dateTimeInvokeCounter++ % 5 == 0)
+	//		wifiPainter->Draw();
 
-		display->Display();
+	//	display->Display();
 
-		//clock_t stop = clock();
-		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
-		//printf("Time elapsed in ms: %f", elapsed);
-	}, 1000);
-	timeSignaller->Start();
+	//	//clock_t stop = clock();
+	//	//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+	//	//printf("Time elapsed in ms: %f", elapsed);
+	//}, 1000);
+	//timeSignaller->Start();
 	//========================================================================================================
 
 	//=== button pressed =====================================================================================
@@ -80,6 +114,8 @@ int main1()
 	pinSignaller->Start();
 	//========================================================================================================
 
+	
+
 	while (true)
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -87,4 +123,5 @@ int main1()
 
 	delete timeSignaller;
 	delete dateTimePainter;
+	*/
 }

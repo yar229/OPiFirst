@@ -10,7 +10,7 @@ extern "C"
 }
 #endif
 
-int main(void)
+int main11(void)
 {
 	/*LittlevGL init*/
 	lv_init();

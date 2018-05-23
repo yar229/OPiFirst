@@ -6,8 +6,8 @@
 extern "C"
 {
 #endif
-	#include "fonts.h"
 	#include "DateTimePainter.h"
+	#include "LvglScreen.h"
 #ifdef __cplusplus
 }
 #endif
@@ -16,9 +16,26 @@ using namespace std;
 using std::chrono::steady_clock;
 using std::chrono::system_clock;
 
-DateTimePainter::DateTimePainter(OledDisplay *display)
+DateTimePainter::DateTimePainter(LvglScreen * screen)
 {
-	_display = display;
+	_screen = screen;
+
+	_boxMain = lv_cont_create(lv_scr_act(), NULL);
+	lv_obj_set_style(_boxMain, &lv_style_pretty);
+	lv_cont_set_fit(_boxMain, true, true);
+
+	_lblDate = lv_label_create(_boxMain, NULL);
+	lv_obj_align(_lblDate, NULL, LV_ALIGN_IN_TOP_MID, 0, 20);
+	lv_label_set_text(_lblDate, "Mon, 01 Jan 1970");
+
+	_lblTime = lv_label_create(_boxMain, NULL);
+	lv_obj_align(_lblTime, NULL, LV_ALIGN_IN_TOP_MID, 0, 40);
+	lv_label_set_text(_lblTime, "21:45");
+
+	_lblSeconds = lv_label_create(_boxMain, NULL);
+	lv_label_set_text(_lblSeconds, "56");
+
+	lv_obj_align(_boxMain, NULL, LV_ALIGN_IN_TOP_MID, 0, 20);
 }
 
 DateTimePainter::~DateTimePainter()
@@ -29,39 +46,22 @@ void DateTimePainter::Draw(std::time_t time)
 {
 	auto local = localtime(&time);
 
-	if (_doFullRedraw) _display->ClearDisplay();
-
-	if (_firstDraw || _doFullRedraw || _oldTime->tm_year != local->tm_year || _oldTime->tm_mon != local->tm_mon || _oldTime->tm_mday != local->tm_mday)
+	if (_firstDraw || _oldTime->tm_year != local->tm_year || _oldTime->tm_mon != local->tm_mon || _oldTime->tm_mday != local->tm_mday)
 	{	// draw year-month-day line
-		_display->FillRectangle(0, _coordYDate, _display->Width, _fontSmall->height, BLACK); //dirty clean date string
-
 		strftime(_printBuffer, 100, "%a, %Y-%m-%d", local);
-		_display->DrawString(
-			_fontSmall, 
-			(unsigned char *)_printBuffer, 
-			_display->Width / 2 - ssd1306_stringWidth(_fontSmall, (unsigned char *)_printBuffer) / 2,
-			_coordYDate);
+		lv_label_set_text(_lblDate, _printBuffer);
 	}
 
-	if (_firstDraw || _doFullRedraw || _oldTime->tm_hour != local->tm_hour)
+	if (_firstDraw || _oldTime->tm_hour != local->tm_hour || _oldTime->tm_min != local->tm_min)
 	{
-		_display->FillRectangle(_coordXHour, _coordYTime, _coordXColon - _coordXHour, _fontBig->height, BLACK); //dirty clean time left part (hours)
-		DrawNum2(_fontBig, local->tm_hour, _coordXHour, _coordYTime, _printBuffer);
+		strftime(_printBuffer, 100, "%HH:%MM", local);
+		lv_label_set_text(_lblTime, _printBuffer);
 	}
 
-	if (_firstDraw || _firstDraw || _doFullRedraw || 0 == _oldTime->tm_year)
-		_display->DrawString(_fontBig, (unsigned char *)":", _coordXColon, _coordYTime);
-
-	if (_firstDraw || _doFullRedraw || _oldTime->tm_min != local->tm_min)
+	if (_firstDraw || _oldTime->tm_sec != local->tm_sec)
 	{
-		_display->FillRectangle(_coordXMinute, _coordYTime, _coordXSecond - _coordXMinute, _fontBig->height, BLACK); //dirty clean time right part (mins and secs)
-		DrawNum2(_fontBig, local->tm_min, _coordXMinute, _coordYTime, _printBuffer);
-	}
-
-	if (_firstDraw || _doFullRedraw || _oldTime->tm_sec != local->tm_sec)
-	{
-		_display->FillRectangle(_coordXSecond, _coordYTime, _display->Width - _coordXSecond, _fontSmall->height, BLACK); //dirty clean time right part (mins and secs)
-		DrawNum2(_fontSmall, local->tm_sec, _coordXSecond, _coordYTime, _printBuffer);
+		sprintf(_printBuffer, "%02d", local->tm_sec);
+		lv_label_set_text(_lblSeconds, _printBuffer);
 	}
 
 	memcpy(_oldTime, local, sizeof(struct tm));
@@ -69,9 +69,4 @@ void DateTimePainter::Draw(std::time_t time)
 	if (_firstDraw) _firstDraw = false;
 }
 
-inline void DateTimePainter::DrawNum2(font_info_t* font, int value, int x, int y, char *buffer)
-{
-	sprintf(buffer, "%02d", value);
-	_display->DrawString(font, (unsigned char *)buffer, x, y);
-}
 
