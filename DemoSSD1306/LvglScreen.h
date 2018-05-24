@@ -17,6 +17,8 @@ public:
 	~LvglScreen();
 
 	lv_style_t Style;
+	lv_obj_t * Screen;
+
 private:
 	lv_disp_drv_t _disp_drv;
 };

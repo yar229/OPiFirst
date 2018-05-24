@@ -16,7 +16,7 @@ LvglScreen::LvglScreen()
 	// style
 	lv_style_copy(&Style, &lv_style_plain);    /*Copy a built-in style to initialize the new style*/
 	Style.body.main_color = LV_COLOR_BLACK;
-	Style.body.grad_color = LV_COLOR_BLUE;
+	Style.body.grad_color = LV_COLOR_BLACK;
 	Style.body.radius = 10;
 	Style.body.border.color = LV_COLOR_GRAY;
 	Style.body.border.width = 2;
@@ -24,6 +24,10 @@ LvglScreen::LvglScreen()
 	Style.body.padding.hor = 5;            /*Horizontal padding, used by the bar indicator below*/
 	Style.body.padding.ver = 5;            /*Vertical padding, used by the bar indicator below*/
 	Style.text.color = LV_COLOR_RED;
+
+	Screen = lv_obj_create(NULL, NULL);
+	lv_obj_set_style(Screen, &Style);
+	lv_scr_load(Screen);
 }
 
 

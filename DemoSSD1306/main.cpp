@@ -6,6 +6,10 @@
 extern "C"
 {
 #endif
+	#include "callbackMethod.h"
+
+	#include "lvgl/lv_core/lv_refr.h"
+
 	#include "LvglScreen.h"
 
 	//#include <wiringPi.h>
@@ -23,37 +27,60 @@ extern "C"
 }
 #endif
 
+using namespace std;
+using std::chrono::steady_clock;
+using std::chrono::system_clock;
+
+time_t steady_clock_to_time_t(steady_clock::time_point t)
+{
+	return system_clock::to_time_t(system_clock::now()
+		+ (t - steady_clock::now()));
+}
 
 int main()
 {
 	LvglScreen* screen = new LvglScreen();
 
 	DateTimePainter* dateTimePainter = new DateTimePainter(screen);
-	volatile int dateTimeInvokeCounter = 0;
-	//WifiPainter* wifiPainter = new WifiPainter(display);
-	TimerSignaller* timeSignaller = new TimerSignaller([dateTimePainter, /*wifiPainter,*/ &dateTimeInvokeCounter](time_t t)
+	//volatile int dateTimeInvokeCounter = 0;
+	////WifiPainter* wifiPainter = new WifiPainter(display);
+	//TimerSignaller* timeSignaller = new TimerSignaller([dateTimePainter, /*wifiPainter,*/ &dateTimeInvokeCounter](time_t t)
+	//{
+	//	//clock_t start = clock();
+
+	//	dateTimePainter->Draw(t);
+	//	//lv_tick_inc(5);
+	//	//lv_task_handler();
+	//		
+
+	//	//lv_task_create()
+
+	//	//if (dateTimeInvokeCounter++ % 5 == 0)
+	//	//	wifiPainter->Draw();
+
+	//	/*display->Display();*/
+
+	//	//clock_t stop = clock();
+	//	//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+	//	//printf("Time elapsed in ms: %f", elapsed);
+	//}, 1000);
+	//timeSignaller->Start();
+	auto fn = fnptr<void(void*)>([dateTimePainter] 
 	{
-		//clock_t start = clock();
+		std::time_t now_c = steady_clock_to_time_t(std::chrono::steady_clock::now());
+		dateTimePainter->Draw(now_c);
+	});
+	lv_task_create(fn, 1000, LV_TASK_PRIO_MID, NULL);
 
-		dateTimePainter->Draw(t);
-
-		//if (dateTimeInvokeCounter++ % 5 == 0)
-		//	wifiPainter->Draw();
-
-		/*display->Display();*/
-
-		//clock_t stop = clock();
-		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
-		//printf("Time elapsed in ms: %f", elapsed);
-	}, 1000);
-	timeSignaller->Start();
-
+	//lv_task_init();
 	while (true)
 	{
+		lv_tick_inc(5);
+		lv_task_handler();
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
 
-	delete timeSignaller;
+	//delete timeSignaller;
 	delete dateTimePainter;
 
 

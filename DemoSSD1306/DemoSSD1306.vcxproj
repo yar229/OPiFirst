@@ -262,6 +262,9 @@
     <Link>
       <DebuggerSymbolInformation>true</DebuggerSymbolInformation>
     </Link>
+    <ClCompile>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -24,6 +24,11 @@ class DateTimePainter
 
 	private:
 		LvglScreen *_screen;
+
+		lv_style_t _styleCommon;
+		lv_style_t _styleSmallText;
+
+
 		lv_obj_t * _boxMain;
 		lv_obj_t * _lblDate;
 		lv_obj_t * _lblTime;
